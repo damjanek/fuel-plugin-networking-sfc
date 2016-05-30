@@ -1,0 +1,6 @@
+language: python
+python:
+  - "2.7"
+install:
+  - pip install fuel-plugin-builder
+script: fpb --build fuel-plugin-networking-sfc
