@@ -11,9 +11,9 @@ fuel_version: ['9.0']
 # Specify license of your plugin
 licenses: ['Apache License Version 2.0']
 # Specify author or company name
-authors: ['Maciej Relewicz','Mirantis']
+authors: ['Maciej Relewicz <mrelewicz@mirantis.com>', 'Damian Szeluga <dszeluga@mirantis.com>']
 # A link to the plugin's page
-homepage: 'https://github.com/stackforge/fuel-plugins'
+homepage: 'https://github.com/damjanek/fuel-plugin-networking-sfc'
 # Specify a group which your plugin implements, possible options:
 # network, storage, storage::cinder, storage::glance, hypervisor
 groups: [network]

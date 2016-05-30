@@ -13,3 +13,26 @@
 #    under the License.
 
 notice('MODULAR: networking-sfc/networking-sfc-compute.pp')
+
+vcsrepo { '/root/networking-sfc':
+  ensure   => mirror,
+  provider => git,
+  source   => 'https://github.com/openstack/networking-sfc.git',
+} ->
+exec { 'install sfc':
+  command => 'python setup.py install && touch /usr/local/sfc_installed',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin',
+  cwd     => '/root/networking-sfc',
+  creates => '/usr/local/sfc_installed',
+} ->
+# TODO: replace it with something less ugly
+exec { 'Modify neutron.conf':
+  command => "sed -i '/^service_plugins/ s/$/,networking_sfc.services.flowclassifier.plugin.FlowClassifierPlugin,networking_sfc.services.sfc.plugin.SfcPlugin/' /etc/neutron/neutron.conf && echo -e '\n[sfc]\ndrivers = ovs\n' >> /etc/neutron/neutron.conf && touch /usr/local/sfc_configured",
+  creates => '/usr/local/sfc_configured',
+} ->
+# TODO: same here
+exec { 'Modify neutron-openvswitch-agent.conf':
+  command => "sed -i 's|/usr/bin|/usr/local/bin|g' /etc/init/neutron-openvswitch-agent.conf && touch /usr/local/sfc_configured2",
+  creates => '/usr/local/sfc_configured2',
+  notify  => Service['neutron-openvswitch-agent']
+}
