@@ -36,7 +36,7 @@ exec { 'install sfc':
 } ->
 # TODO: replace it with something less ugly
 exec { 'Modify neutron.conf':
-  command => "sed -i '/^service_plugins/ s/$/,networking_sfc.services.flowclassifier.plugin.FlowClassifierPlugin,networking_sfc.services.sfc.plugin.SfcPlugin/' /etc/neutron/neutron.conf && echo -e '\n[sfc]\ndrivers = ovs\n' >> /etc/neutron/neutron.conf && touch /usr/local/sfc_configured",
+  command => "sed -i '/^service_plugins/ s/$/,networking_sfc.services.flowclassifier.plugin.FlowClassifierPlugin,networking_sfc.services.sfc.plugin.SfcPlugin/' /etc/neutron/neutron.conf && echo '\n[sfc]\ndrivers = ovs\n' >> /etc/neutron/neutron.conf && touch /usr/local/sfc_configured",
   path    => '/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin',
   creates => '/usr/local/sfc_configured',
 } ->
