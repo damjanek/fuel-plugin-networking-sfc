@@ -17,7 +17,7 @@ notice('MODULAR: networking-sfc/networking-sfc-controller.pp')
 $primary_controller = hiera('primary_controller')
 
 vcsrepo { '/root/networking-sfc':
-  ensure   => mirror,
+  ensure   => present,
   provider => git,
   source   => 'https://github.com/openstack/networking-sfc.git',
 } ->

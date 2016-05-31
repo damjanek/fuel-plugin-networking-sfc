@@ -15,7 +15,7 @@
 notice('MODULAR: networking-sfc/networking-sfc-compute.pp')
 
 vcsrepo { '/root/networking-sfc':
-  ensure   => mirror,
+  ensure   => present,
   provider => git,
   source   => 'https://github.com/openstack/networking-sfc.git',
 } ->
