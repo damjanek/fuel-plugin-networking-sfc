@@ -22,6 +22,7 @@ Requirements
 Known Issues
 -------------------
 It is required to install this on vxlans enabled environment. Will not work otherwise.
+
 You need to perform following command after plugin installation on primary controller:
 ```
 neutron-db-manage --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini --subproject networking-sfc upgrade head
@@ -32,4 +33,6 @@ Contributors
 ------------
 
 Damian Szeluga <dszeluga@mirantis.com> (developer)
+
 Maciej Relewicz <mrelewicz@mirantis.com> (developer)
+
