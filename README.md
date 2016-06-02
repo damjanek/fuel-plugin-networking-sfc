@@ -67,7 +67,6 @@ Networking SFC plugin configuration
 Contributors
 ------------
 
-Damian Szeluga <dszeluga@mirantis.com> (developer)
-
-Maciej Relewicz <mrelewicz@mirantis.com> (developer)
+ * Damian Szeluga <dszeluga@mirantis.com> (developer)
+ * Maciej Relewicz <mrelewicz@mirantis.com> (developer)
 
