@@ -25,7 +25,7 @@ function cleanup {
 
 command -v fpm >/dev/null 2>&1 || { echo >&2 "fpm ruby gem required but it's not installed.  Aborting."; exit 1; }
 
-#cleanup
+cleanup
 mkdir -p "${TMP_DIR}"
 pushd $TMP_DIR
 
