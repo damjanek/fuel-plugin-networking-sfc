@@ -28,6 +28,41 @@ You need to perform following command after plugin installation on primary contr
 neutron-db-manage --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini --subproject networking-sfc upgrade head
 ```
 
+Installation Guide
+==================
+
+Networking SFC plugin installation
+---------------------------
+
+To install Networking SFC plugin, follow these steps:
+
+1. Build a plugin `fpb --build dir`
+
+2. Copy the plugin on already installed Fuel Master node; ssh can be used for
+    that. If you do not have the Fuel Master node yet, see
+    [Quick Start Guide](https://software.mirantis.com/quick-start/) :
+
+        # scp networking-sfc-<version>.noarch.rpm root@<Fuel_Master_ip>:/tmp
+
+3. Install the plugin:
+
+        # cd /tmp
+        # fuel plugins --install networking-sfc-<version>.noarch.rpm
+
+4. Check if the plugin was installed successfully:
+
+        # [root@nailgun ~]# fuel plugins
+        id | name           | version | package_version | releases
+        ---|----------------|---------|-----------------|--------------------
+        1  | networking-sfc | 1.0.0   | 4.0.0           | ubuntu (mitaka-9.0)
+
+Networking SFC plugin configuration
+----------------------------
+
+1. Create an environment.
+2. Enable L2 Population in network tab.
+3. Enable the plugin on the Settings tab of the Fuel web UI.
+4. Deploy the environment.
 
 Contributors
 ------------
