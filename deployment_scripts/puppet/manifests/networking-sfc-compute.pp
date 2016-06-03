@@ -23,7 +23,11 @@ if $use_neutron {
   $default_service_plugins = [
      'neutron.services.l3_router.l3_router_plugin.L3RouterPlugin',
      'neutron.services.metering.metering_plugin.MeteringPlugin',
-   ]
+  ]
+  $sfc_plugins = [
+    'networking_sfc.services.flowclassifier.plugin.FlowClassifierPlugin',
+    'networking_sfc.services.sfc.plugin.SfcPlugin',
+  ]
 
   service {'neutron-openvswitch-agent':
     ensure    => running,
@@ -35,7 +39,7 @@ if $use_neutron {
       ensure => installed,
   } ->
 
-  neutron_config { 'DEFAULT/service_plugins': value => join($default_service_plugins, ',networking_sfc.services.flowclassifier.plugin.FlowClassifierPlugin,networking_sfc.services.sfc.plugin.SfcPlugin') } ->
+  neutron_config { 'DEFAULT/service_plugins': value => join($default_service_plugins,$sfc_plugins,',') } ->
 
   neutron_plugin_ml2 { 'securitygroup/enable_security_group': value => 'False'} ->
   neutron_plugin_ml2 { 'securitygroup/enable_ipset': value => 'False'} ->

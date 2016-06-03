@@ -29,6 +29,10 @@ if $use_neutron {
     'neutron.services.l3_router.l3_router_plugin.L3RouterPlugin',
     'neutron.services.metering.metering_plugin.MeteringPlugin',
   ]
+  $sfc_plugins = [
+    'networking_sfc.services.flowclassifier.plugin.FlowClassifierPlugin',
+    'networking_sfc.services.sfc.plugin.SfcPlugin',
+  ]
 
   if $node_name in keys($neutron_nodes) {
     if $neutron_server_enable {
@@ -65,7 +69,7 @@ if $use_neutron {
    notify{"Schema upgrade for SFC": } ~> Exec['neutron-db-sync']
   }
 
-  neutron_config { 'DEFAULT/service_plugins': value => join($default_service_plugins, ',networking_sfc.services.flowclassifier.plugin.FlowClassifierPlugin,networking_sfc.services.sfc.plugin.SfcPlugin') } ->
+  neutron_config { 'DEFAULT/service_plugins': value => join($default_service_plugins,$sfc_plugins,',') } ->
 
   neutron_plugin_ml2 { 'securitygroup/enable_security_group': value => 'False'} ->
   neutron_plugin_ml2 { 'securitygroup/enable_ipset': value => 'False'} ->
