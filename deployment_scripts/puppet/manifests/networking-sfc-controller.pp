@@ -68,6 +68,7 @@ if $use_neutron {
   neutron_config { 'DEFAULT/service_plugins': value => join($default_service_plugins, ',networking_sfc.services.flowclassifier.plugin.FlowClassifierPlugin,networking_sfc.services.sfc.plugin.SfcPlugin') } ->
 
   neutron_plugin_ml2 { 'securitygroup/enable_security_group': value => 'False'} ->
+  neutron_plugin_ml2 { 'securitygroup/enable_ipset': value => 'False'} ->
   neutron_plugin_ml2 { 'securitygroup/firewall_driver': value => 'neutron.agent.firewall.NoopFirewallDriver'} ->
 
   file_line { 'Add OSV section to neutron.conf':
