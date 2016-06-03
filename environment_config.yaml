@@ -1,6 +1,0 @@
-attributes:
-  metadata:
-    restrictions:
-      - action: hide
-      - condition: "settings:neutron_advanced_configuration.neutron_l2_pop.value == true and networking_parameters:segmentation_type != 'vlan'"
-        message: "Enable Neutron L2 Population and Use neutron with tunneling segmentation"

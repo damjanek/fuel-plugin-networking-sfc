@@ -32,7 +32,7 @@ pushd $TMP_DIR
 git clone $GIT_REPOSITORY_URL networking-sfc
 
 pushd "${DIR}/repositories/ubuntu/"
-fpm --architecture all --force -s python -t deb -m "${MAINTAINERS}" --python-install-lib /usr/lib/python2.7/dist-packages ${TMP_DIR}/networking-sfc/setup.py
+fpm --architecture all --force -s python --no-python-dependencies -t deb -m "${MAINTAINERS}" --python-install-lib /usr/lib/python2.7/dist-packages ${TMP_DIR}/networking-sfc/setup.py
 popd
 
 if [ "$CLEANUP" != false ];then
