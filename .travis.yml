@@ -5,4 +5,5 @@ sudo: true
 install:
   - sudo apt-get install createrepo rpm dpkg-dev
   - pip install fuel-plugin-builder
+  - gem install fpm
 script: cd .. && fpb --build fuel-plugin-networking-sfc
