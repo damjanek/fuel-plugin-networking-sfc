@@ -34,6 +34,8 @@ if $use_neutron {
     'networking_sfc.services.sfc.plugin.SfcPlugin',
   ]
 
+  $enabled_plugins = inline_template("<%= (@default_service_plugins + @sfc_plugins).join(',') %>")
+
   if $node_name in keys($neutron_nodes) {
     if $neutron_server_enable {
       $service_ensure = 'running'
@@ -69,7 +71,7 @@ if $use_neutron {
    notify{"Schema upgrade for SFC": } ~> Exec['neutron-db-sync']
   }
 
-  neutron_config { 'DEFAULT/service_plugins': value => join($default_service_plugins,$sfc_plugins,',') } ->
+  neutron_config { 'DEFAULT/service_plugins': value => $enabled_plugins } ->
 
   neutron_plugin_ml2 { 'securitygroup/enable_security_group': value => 'False'} ->
   neutron_plugin_ml2 { 'securitygroup/enable_ipset': value => 'False'} ->

@@ -29,6 +29,8 @@ if $use_neutron {
     'networking_sfc.services.sfc.plugin.SfcPlugin',
   ]
 
+  $enabled_plugins = inline_template("<%= (@default_service_plugins + @sfc_plugins).join(',') %>")
+
   service {'neutron-openvswitch-agent':
     ensure    => running,
     enable    => true,
@@ -39,7 +41,7 @@ if $use_neutron {
       ensure => installed,
   } ->
 
-  neutron_config { 'DEFAULT/service_plugins': value => join($default_service_plugins,$sfc_plugins,',') } ->
+  neutron_config { 'DEFAULT/service_plugins': value => $enabled_plugins } ->
 
   neutron_plugin_ml2 { 'securitygroup/enable_security_group': value => 'False'} ->
   neutron_plugin_ml2 { 'securitygroup/enable_ipset': value => 'False'} ->
